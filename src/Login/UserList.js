@@ -5,29 +5,19 @@ import { Link } from 'react-router-dom';
 
 
 const UserList = () => {
-    const [users, setUser] = useState([]);
+   const [users, setUser] = useState([]);
 
         useEffect(()=> {
         loadUsers();
         },[]);
 
         const loadUsers = async () =>{
-            // Axios.post("http://localhost:3002/list").then((response)=>{
-            //     if(response.data.msg){
-            //         setUser(response.data.msg)
-            //     }else{
-            //         setUser(response.data)
-            //     }
-            // })
             const result = await axios.get("https://my-json-server.typicode.com/vishalpatel08/JsonServer/users"); 
             setUser(result.data);
         }
 
-        const onDelete = async (e, idd) => {
-            e.preventDefault()
-            // Axios.post("http://localhost:3002/delete", { idd:idd }).then((response)=>{})
-            // loadUsers();
-            await axios.delete(`https://my-json-server.typicode.com/vishalpatel08/JsonServer/users/${idd}`);
+        const onDelete = async id =>{
+            await axios.delete(`https://my-json-server.typicode.com/vishalpatel08/JsonServer/users/${id}`);
             loadUsers();
         }
     return(
